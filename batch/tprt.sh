@@ -1,13 +1,13 @@
 #!/usr/bin/sh
-if [ -f /app/param/app.env ] ; then
-    . /app/param/app.env
+if [ -f ~/tprt/param/tprt.env ] ; then
+    . ~/tprt/param/tprt.env
 else
     echo "Fichier de paramétrage non chargé !"
     exit 8
 fi
 
-logFile="app.log"
-jnlAppTraitement="${logPath}/${logFile}"
+logFile="tprt.log"
+jnlAppTraitement="${tprtPath}/log/${logFile}"
 
 function fun_writeLog {
     msg=$1
@@ -17,7 +17,7 @@ function fun_writeLog {
 
 function fun_exit {
     fun_writeLog "*******************************************"
-    fun_writeLog " Stopping app scripts : $(date +"%Y/%m/%d %T")"
+    fun_writeLog " Arrêt de la boucle : $(date +"%Y/%m/%d %T")"
     fun_writeLog "*******************************************"
     exit 0
 }
@@ -25,7 +25,7 @@ function fun_exit {
 trap fun_exit 15
 
 fun_writeLog "*******************************************"
-fun_writeLog " Starting app script : $(date +"%Y/%m/%d %T")"
+fun_writeLog " Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
 fun_writeLog "*******************************************"
 
 while true ; do

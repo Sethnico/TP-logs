@@ -1,8 +1,0 @@
-[Unit]
-Description=My App service
-
-[Service]
-ExecStart=/app/batch/app.sh
-
-[Install]
-WantedBy=multi-user.target

@@ -1,1 +1,0 @@
-* * * * * . /app/param/app.env ; systemctl stop app ; sleep 5 ; /app/batch/archivage.sh ; sleep 5 ; /app/batch/purge.sh ; sleep 5 ; systemctl start app

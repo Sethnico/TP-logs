@@ -1,6 +1,6 @@
 #!/usr/bin/sh
-if [ -f /app/param/app.env ] ; then
-    . /app/param/app.env
+if [ -f ~/tprt/param/tprt.env ] ; then
+    . ~/tprt/param/tprt.env
 else
     echo "Fichier de paramétrage non chargé !"
     exit 8
@@ -8,9 +8,8 @@ fi
 
 logFile="jnlArchivage.log"
 archDir=$(date +"%Y%m%d-%H%M%S")
-jnlArchivage="${logPath}/${archDir}/${logFile}"
+jnlArchivage="${tprtPath}/log/${archDir}/${logFile}"
 typeset -i nbArchivedFiles=0
-typeset -i nbArchivedFilesUnit=0
 
 function fun_writeLog {
     msg=$1
@@ -18,28 +17,26 @@ function fun_writeLog {
     echo "${eventDateTime} - ${msg}" >> ${jnlArchivage}
 }
 
-if [ ! -d "${logPath}/${archDir}" ] ; then
-    mkdir "${logPath}/${archDir}"
+if [ ! -d "${tprtPath}/log/${archDir}" ] ; then
+    mkdir "${tprtPath}/log/${archDir}"
 fi
 
 fun_writeLog "*******************************************"
-fun_writeLog " Starting  archivage script : $(date +"%Y/%m/%d %T")"
+fun_writeLog " Démarrage de l'archivage : $(date +"%Y/%m/%d %T")"
 fun_writeLog "*******************************************"
 
-fun_writeLog "Archivage de ${logPath}..."
-for file in $(find ${logPath} -maxdepth 1 -type f -name "*.log" ) ; do
-    fun_writeLog "    Deplacement de ${file} dans ${logPath}/${archDir}/"
-    mv ${file} "${logPath}/${archDir}/"
+fun_writeLog "Archivage de ${tprtPath}/log..."
+for file in $(find ${tprtPath}/log -maxdepth 1 -type f -name "*.log" ) ; do
+    fun_writeLog "    Deplacement de ${file} dans ${tprtPath}/log/${archDir}/"
+    mv ${file} "${tprtPath}/log/${archDir}/"
     if [[ $? -eq 0 ]] ; then
         nbArchivedFiles=$((nbArchivedFiles + 1))
-        nbArchivedFilesUnit=$((nbArchivedFilesUnit + 1))
     fi
 done
-fun_writeLog "    Fin d'archivage de ${logPath}. ${nbArchivedFiles} fichier archivés."
 
-fun_writeLog "Number of files archived : ${nbArchivedFiles}"
+fun_writeLog "Nombre de fichier archivé : ${nbArchivedFiles}"
 fun_writeLog "*******************************************"
-fun_writeLog " End of archivage script : $(date +"%Y/%m/%d %T")"
+fun_writeLog " Fin de l'archivage : $(date +"%Y/%m/%d %T")"
 fun_writeLog "*******************************************"
 
 exit 0

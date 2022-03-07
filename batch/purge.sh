@@ -1,13 +1,13 @@
 #!/usr/bin/sh
-if [ -f /app/param/app.env ] ; then
-    . /app/param/app.env
+if [ -f ~/tprt/param/tprt.env ] ; then
+    . ~/tprt/param/tprt.env
 else
     echo "Fichier de paramétrage non chargé !"
     exit 8
 fi
 
 logFile="jnlPurge.log"
-jnlPurge="${logPath}/${logFile}"
+jnlPurge="${tprtPath}/log/${logFile}"
 typeset -i nbPurgeFiles=0
 
 function fun_writeLog {
@@ -16,27 +16,26 @@ function fun_writeLog {
     echo "${eventDateTime} - ${msg}" >> ${jnlPurge}
 }
 
-if [ ! -d "${logPath}/${archDir}" ] ; then
-    mkdir "${logPath}/${archDir}"
+if [ ! -d "${tprtPath}/log/${archDir}" ] ; then
+    mkdir "${tprtPath}/log/${archDir}"
 fi
 
 fun_writeLog "*******************************************"
-fun_writeLog " Starting purge script : $(date +"%Y/%m/%d %T")"
+fun_writeLog " Démarrage de la purge : $(date +"%Y/%m/%d %T")"
 fun_writeLog "*******************************************"
 
-fun_writeLog "Purge des dossiers dans ${logPath} de plus de ${nbJourPurge} minutes..."
-for dirname in $(find ${logPath} -maxdepth 1 -type d -mmin +${nbJourPurge}) ; do
+fun_writeLog "Purge des dossiers dans ${tprtPath}/log de plus de ${nbJourPurge} minutes..."
+for dirname in $(find ${tprtPath}/log -maxdepth 1 -type d -mmin +${nbJourPurge}) ; do
     fun_writeLog "    Suppression de ${dirname}."
     rm -rf ${dirname}
     if [[ $? -eq 0 ]] ; then
         nbPurgeFiles=$((nbPurgeFiles + 1))
     fi
 done
-fun_writeLog "    Fin de la purge ${logPath}."
 
-fun_writeLog "Number of directory purged : ${nbPurgeFiles}"
+fun_writeLog "Nombre de dossier purgé : ${nbPurgeFiles}"
 fun_writeLog "*******************************************"
-fun_writeLog " End of purge script : $(date +"%Y/%m/%d %T")"
+fun_writeLog " Fin de la purge : $(date +"%Y/%m/%d %T")"
 fun_writeLog "*******************************************"
 
 exit 0

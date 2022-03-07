@@ -29,6 +29,6 @@ fun_writeLog " Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
 fun_writeLog "*******************************************"
 
 while true ; do
-    fun_writeLog "Everything is fine..."
+    fun_writeLog "[TPRT0000] - Everything is fine..."
     sleep 5
 done

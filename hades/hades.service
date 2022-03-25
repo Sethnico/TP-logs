@@ -1,0 +1,11 @@
+[Unit]
+Description=Hades deamon
+
+[Service]
+User=tlmkr
+WorkingDirectory=/app/hades
+ExecStart=/app/hades/batch/hades.sh
+ExecReload=/bin/kill -s HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

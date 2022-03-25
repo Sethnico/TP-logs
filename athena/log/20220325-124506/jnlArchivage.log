@@ -1,0 +1,12 @@
+20220325 12:45:06.649 - *******************************************
+20220325 12:45:06.653 -  Démarrage de l'archivage : 2022/03/25 12:45:06
+20220325 12:45:06.655 - *******************************************
+20220325 12:45:06.657 - Archivage de /app/athena/log...
+20220325 12:45:06.663 -     Deplacement de /app/athena/log/jnlPurge.log dans /app/athena/log/20220325-124506/
+20220325 12:45:06.668 -     Deplacement de /app/athena/log/start.log dans /app/athena/log/20220325-124506/
+20220325 12:45:06.673 -     Deplacement de /app/athena/log/athena.log dans /app/athena/log/20220325-124506/
+20220325 12:45:06.678 -     Deplacement de /app/athena/log/stop.log dans /app/athena/log/20220325-124506/
+20220325 12:45:06.684 - Nombre de fichier archivé : 4
+20220325 12:45:06.686 - *******************************************
+20220325 12:45:06.690 -  Fin de l'archivage : 2022/03/25 12:45:06
+20220325 12:45:06.692 - *******************************************

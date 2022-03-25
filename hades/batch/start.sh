@@ -1,13 +1,13 @@
 #!/usr/bin/sh
-if [ -f ~/tprt/param/tprt.env ] ; then
-    . ~/tprt/param/tprt.env
+if [ -f /app/hades/param/hades.env ] ; then
+    . /app/hades/param/hades.env
 else
     echo "Fichier de paramétrage non chargé !"
     exit 8
 fi
 
 logFile="start.log"
-jnlAppTraitement="${tprtPath}/log/${logFile}"
+jnlAppTraitement="${appPath}/log/${logFile}"
 
 function fun_writeLog {
     msg=$1
@@ -19,10 +19,14 @@ fun_writeLog "*******************************************"
 fun_writeLog " Démarrage de l'application : $(date +"%Y/%m/%d %T")"
 fun_writeLog "*******************************************"
 
-nbProc=$(ps -ef | grep tprt.sh | grep -v grep | wc -l)
+nbProc=$(ps -ef | grep ${appName}.sh | grep -v grep | wc -l)
 if [[ ${nbProc} -eq 0 ]] ; then
     fun_writeLog "Pas de process en cours. Lancement de la boucle"
-    nohup ${tprtPath}/batch/tprt.sh >> ${jnlAppTraitement} 2>&1 &
+    nohup ${appPath}/batch/${appName}.sh >> ${jnlAppTraitement} 2>&1 &
+    if [[ $? -ne 0 ]] ; then
+        fun_writeLog "Erreur lors du lancement de l'application"
+    fi
 else
     fun_writeLog "Boucle déjà lancée. On ne la relance pas."
+    ps -ef | grep ${appName}.sh | grep -v grep
 fi

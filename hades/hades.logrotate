@@ -1,0 +1,8 @@
+/app/hades/log/*.log {
+    daily
+    missingok
+    compress
+    rotate 4
+    dateext
+    su tlmkr tlmkr
+}

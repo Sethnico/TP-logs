@@ -16,25 +16,25 @@ Prerequisites
 git clone [repo] .
 
 Athena :
---------
+++++++++
 crontab >
 
 Hades :
--------
++++++++
 systemctl enable
 
 
 Usage
 =====
 Athena :
---------
-.. code-block:: bash
-	~$ /app/athena/batch/start.sh
+++++++++
+.. code-block:: console
+   ~$ /app/athena/batch/start.sh
 
 Hades :
--------
-.. code-block:: bash
-        ~$ sudo systemctl start hades
++++++++
+.. code-block:: console
+   ~$ sudo systemctl start hades
 
 
 Messages

@@ -15,12 +15,12 @@ fi
 
 gsFicLog="${envAppPath}/log/stop.log"
 
-fun_logInfo "TPRT0001" "Arrêt de l'application : $(date +"%Y/%m/%d %T")"
+fun_logInfo "ATH0001" "Arrêt de l'application : $(date +"%Y/%m/%d %T")"
 
 nbProc=$(ps -ef | grep ${envAppName}.sh | grep -v grep | wc -l)
 if [[ ${nbProc} -eq 0 ]] ; then
-    fun_logInfo "TPRT0001" "Pas de process en cours. Application déjà stoppée."
+    fun_logInfo "ATH0001" "Pas de process en cours. Application déjà stoppée."
 else
-    fun_logInfo "TPRT0001" "Kill en SIGTERM de la boucle"
+    fun_logInfo "ATH0001" "Kill en SIGTERM de la boucle"
     ps -ef | grep ${envAppName}.sh | grep -v grep | awk '{print $2}' | xargs kill -15
 fi

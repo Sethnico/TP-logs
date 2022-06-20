@@ -16,15 +16,19 @@ fi
 gsFicLog="${envAppPath}/log/athena.log"
 
 function fun_exit {
-    fun_logInfo "TPRT0001" "Arrêt de la boucle : $(date +"%Y/%m/%d %T")"
+    fun_logInfo "ATH0001" "Arrêt de la boucle : $(date +"%Y/%m/%d %T")"
     exit 0
 }
 
 trap fun_exit 15
 
-fun_logInfo "TPRT0001" "Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
+fun_logInfo "ATH0001" "Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
 
 while true ; do
-    fun_logInfo "TPRT0003" "Everything is fine..."
+    fun_logDebug "ATH0001" "Parcours du répertoire ${envData}/input"
+    for files in $(ls ${envData}/input) ; do
+        fun_logDebug "ATH0003" "Fichier: ${files}"
+    done
+    fun_logInfo "ATH0003" "Fin de la boucle. Nouveau lanecment dans 5 secondes."
     sleep 5
 done

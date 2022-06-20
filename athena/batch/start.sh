@@ -6,27 +6,27 @@ else
     exit 8
 fi
 
-logFile="start.log"
-jnlAppTraitement="${appPath}/log/${logFile}"
+if [ -f /app/athena/lib/functions.sh ] ; then
+    . /app/athena/lib/functions.sh
+else
+    echo "Librairies non chargées !"
+    exit 8
+fi
 
-function fun_writeLog {
-    msg=$1
-    eventDateTime=$(date +"%Y%m%d %T.%3N")
-    echo "${eventDateTime} - ${msg}" >> ${jnlAppTraitement}
-}
+gsFicLog="${envAppPath}/log/start.log"
 
-fun_writeLog "*******************************************"
-fun_writeLog " Démarrage de l'application : $(date +"%Y/%m/%d %T")"
-fun_writeLog "*******************************************"
+fun_logInfo "TPRT0001" "Démarrage de l'application : $(date +"%Y/%m/%d %T")"
 
-nbProc=$(ps -ef | grep ${appName}.sh | grep -v grep | wc -l)
+nbProc=$(ps -ef | grep ${envAppName}.sh | grep -v grep | wc -l)
 if [[ ${nbProc} -eq 0 ]] ; then
-    fun_writeLog "Pas de process en cours. Lancement de la boucle"
-    nohup ${appPath}/batch/${appName}.sh >> ${jnlAppTraitement} 2>&1 &
+    fun_logInfo "TPRT0001" "Pas de process en cours. Lancement..."
+    nohup ${envAppPath}/batch/${envAppName}.sh 1>> ${gsFicLog}.err 2>> ${gsFicLog}.err &
     if [[ $? -ne 0 ]] ; then
-        fun_writeLog "Erreur lors du lancement de l'application"
+        fun_logError "TPRT1001" "Erreur lors du lancement de l'application"
+    else
+        fun_logDebug "TPRT9001" "Application lancée"
     fi
 else
-    fun_writeLog "Boucle déjà lancée. On ne la relance pas."
-    ps -ef | grep ${appName}.sh | grep -v grep
+    fun_logInfo "TPRT0001" "Boucle déjà lancée. On ne la relance pas."
+    ps -ef | grep ${envAppName}.sh | grep -v grep >> ${gsFicLog}.err
 fi

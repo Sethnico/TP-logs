@@ -6,30 +6,25 @@ else
     exit 8
 fi
 
-logFile="athena.log"
-jnlAppTraitement="${appPath}/log/${logFile}"
+if [ -f /app/athena/lib/functions.sh ] ; then
+    . /app/athena/lib/functions.sh
+else
+    echo "Librairies non chargées !"
+    exit 8
+fi
 
-function fun_writeLog {
-    msg=$1
-    eventDateTime=$(date +"%Y%m%d %T.%3N")
-    echo "${eventDateTime} - ${msg}" >> ${jnlAppTraitement}
-}
+gsFicLog="${envAppPath}/log/athena.log"
 
 function fun_exit {
-    fun_writeLog "*******************************************"
-    fun_writeLog " Arrêt de la boucle : $(date +"%Y/%m/%d %T")"
-    fun_writeLog "*******************************************"
+    fun_logInfo "TPRT0001" "Arrêt de la boucle : $(date +"%Y/%m/%d %T")"
     exit 0
 }
 
 trap fun_exit 15
 
-fun_writeLog "*******************************************"
-fun_writeLog " Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
-fun_writeLog "*******************************************"
-fun_writeLog "Lancement de ${appName}"
+fun_logInfo "TPRT0001" "Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
 
 while true ; do
-    fun_writeLog "[INFO] - [TPRT0000] - Everything is fine..."
+    fun_logInfo "TPRT0003" "Everything is fine..."
     sleep 5
 done

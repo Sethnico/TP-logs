@@ -6,56 +6,48 @@ else
     exit 8
 fi
 
-logFile="jnlPurge.log"
-archDir=$(date +"%Y%m%d-%H%M%S")
-jnlPurge="${appPath}/log/${archDir}/${logFile}"
+if [ -f /app/athena/lib/functions.sh ] ; then
+    . /app/athena/lib/functions.sh
+else
+    echo "Librairies non chargées !"
+    exit 8
+fi
+
+fsArchDir=$(date +"%Y%m%d-%H%M%S")
+gsFicLog="${envAppPath}/log/${fsArchDir}/jnlPurge.log"
 typeset -i nbArchivedFiles=0
 typeset -i nbPurgeFiles=0
 
-function fun_writeLog {
-    msg=$1
-    eventDateTime=$(date +"%Y%m%d %T.%3N")
-    echo "${eventDateTime} - ${msg}" >> ${jnlPurge}
-}
-
-if [ ! -d "${appPath}/log/${archDir}" ] ; then
-    mkdir "${appPath}/log/${archDir}"
+if [ ! -d "${envAppPath}/log/${fsArchDir}" ] ; then
+    mkdir "${envAppPath}/log/${fsArchDir}"
 fi
 
-fun_writeLog "*******************************************"
-fun_writeLog " Démarrage de l'archivage : $(date +"%Y/%m/%d %T")"
-fun_writeLog "*******************************************"
+fun_logInfo "TPRT0001" "Démarrage de l'archivage : $(date +"%Y/%m/%d %T")"
 
-fun_writeLog "Archivage de ${appPath}/log..."
-for file in $(find ${appPath}/log -maxdepth 1 -type f -name "*.log" ) ; do
-    fun_writeLog "    Deplacement de ${file} dans ${appPath}/log/${archDir}/"
-    mv ${file} "${appPath}/log/${archDir}/"
+fun_logInfo "TPRT0001" "Archivage de ${envAppPath}/log..."
+for file in $(find ${envAppPath}/log -maxdepth 1 -type f -name "*.log" -o -name "*.err") ; do
+    fun_logInfo "TPRT0001" "    Deplacement de ${file} dans ${envAppPath}/log/${fsArchDir}/"
+    mv ${file} "${envAppPath}/log/${fsArchDir}/"
     if [[ $? -eq 0 ]] ; then
         nbArchivedFiles=$((nbArchivedFiles + 1))
     fi
 done
 
-fun_writeLog "Nombre de fichier archivé : ${nbArchivedFiles}"
-fun_writeLog "*******************************************"
-fun_writeLog " Fin de l'archivage : $(date +"%Y/%m/%d %T")"
-fun_writeLog "*******************************************"
+fun_logInfo "TPRT0001" "Nombre de fichier archivé : ${nbArchivedFiles}"
+fun_logInfo "TPRT0001" "Fin de l'archivage : $(date +"%Y/%m/%d %T")"
 
-fun_writeLog "*******************************************"
-fun_writeLog " Démarrage de la purge : $(date +"%Y/%m/%d %T")"
-fun_writeLog "*******************************************"
+fun_logInfo "TPRT0001" "Démarrage de la purge : $(date +"%Y/%m/%d %T")"
 
-fun_writeLog "Purge des dossiers dans ${appPath}/log de plus de ${nbJourPurge} minutes..."
-for dirname in $(find ${appPath}/log -maxdepth 1 -type d -mmin +${nbJourPurge}) ; do
-    fun_writeLog "    Suppression de ${dirname}."
+fun_logInfo "TPRT0001" "Purge des dossiers dans ${envAppPath}/log de plus de ${envNbJourPurge} minutes..."
+for dirname in $(find ${envAppPath}/log -maxdepth 1 -type d -mmin +${envNbJourPurge}) ; do
+    fun_logInfo "TPRT0001" "    Suppression de ${dirname}."
     rm -rf ${dirname}
     if [[ $? -eq 0 ]] ; then
         nbPurgeFiles=$((nbPurgeFiles + 1))
     fi
 done
 
-fun_writeLog "Nombre de dossier purgé : ${nbPurgeFiles}"
-fun_writeLog "*******************************************"
-fun_writeLog " Fin de la purge : $(date +"%Y/%m/%d %T")"
-fun_writeLog "*******************************************"
+fun_logInfo "TPRT0001" "Nombre de dossier purgé : ${nbPurgeFiles}"
+fun_logInfo "TPRT0001" "Fin de la purge : $(date +"%Y/%m/%d %T")"
 
 exit 0

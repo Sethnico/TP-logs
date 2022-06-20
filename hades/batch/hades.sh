@@ -6,26 +6,22 @@ else
     exit 8
 fi
 
-logFile="hades.log"
-jnlAppTraitement="${appPath}/log/${logFile}"
+if [ -f /app/hades/lib/functions.sh ] ; then
+    . /app/hades/lib/functions.sh
+else
+    echo "Librairies non chargées !"
+    exit 8
+fi
 
-function fun_writeLog {
-    msg=$1
-    eventDateTime=$(date +"%Y%m%d %T.%3N")
-    echo "${eventDateTime} - ${msg}" >> ${jnlAppTraitement}
-}
+gsFicLog="${envAppPath}/log/hades.log"
 
 function fun_exit {
-    fun_writeLog "*******************************************"
-    fun_writeLog " Arrêt de la boucle : $(date +"%Y/%m/%d %T")"
-    fun_writeLog "*******************************************"
+    fun_logInfo "HAD0001" "Arrêt de la boucle : $(date +"%Y/%m/%d %T")"
     exit 0
 }
 
 function fun_reload {
-    fun_writeLog "*******************************************"
-    fun_writeLog " Rechargement de l'application $(date +"%Y/%m/%d %T")"
-    fun_writeLog "*******************************************"
+    fun_logInfo "HAD0001" "Rechargement de l'application $(date +"%Y/%m/%d %T")"
     . /app/hades/param/hades.env
 }
 
@@ -33,12 +29,9 @@ trap fun_exit 15
 
 trap fun_reload 1
 
-fun_writeLog "*******************************************"
-fun_writeLog " Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
-fun_writeLog "*******************************************"
-fun_writeLog "Lancement de ${appName}"
+fun_logInfo "HAD0001" " Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
 
 while true ; do
-    fun_writeLog "[INFO] - [TPRT0000] - Everything is fine..."
-    sleep 1
+    fun_logInfo "HAD0001" "Everything is fine..."
+    sleep 5
 done

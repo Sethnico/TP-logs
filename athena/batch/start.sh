@@ -17,16 +17,16 @@ gsFicLog="${envAppPath}/log/start.log"
 
 fun_logInfo "ATH0001" "Démarrage de l'application : $(date +"%Y/%m/%d %T")"
 
-nbProc=$(ps -ef | grep ${envAppName}.sh | grep -v grep | wc -l)
+nbProc=$(ps -ef | grep ${envAppPath}/batch/${envAppName}.sh | grep -v grep | wc -l)
 if [[ ${nbProc} -eq 0 ]] ; then
     fun_logInfo "ATH0001" "Pas de process en cours. Lancement..."
     nohup ${envAppPath}/batch/${envAppName}.sh 1>> ${gsFicLog}.err 2>> ${gsFicLog}.err &
     if [[ $? -ne 0 ]] ; then
-        fun_logError "ATH1001" "Erreur lors du lancement de l'application"
+        fun_logError "ATH1004" "Erreur lors du lancement de l'application"
     else
-        fun_logDebug "ATH9001" "Application lancée"
+        fun_logDebug "ATH9003" "Application lancée"
     fi
 else
-    fun_logInfo "ATH0001" "Boucle déjà lancée. On ne la relance pas."
+    fun_logInfo "ATH0010" "Boucle déjà lancée. On ne la relance pas."
     ps -ef | grep ${envAppName}.sh | grep -v grep >> ${gsFicLog}.err
 fi

@@ -25,10 +25,28 @@ trap fun_exit 15
 fun_logInfo "ATH0001" "Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
 
 while true ; do
-    fun_logDebug "ATH0001" "Parcours du répertoire ${envData}/input"
-    for files in $(ls ${envData}/input) ; do
-        fun_logDebug "ATH0003" "Fichier: ${files}"
+    fun_logDebug "ATH0002" "Parcours du répertoire ${envData}/input"
+    for file in $(ls ${envData}/input) ; do
+        gsFileExt="${file##*.}"
+        fun_logDebug "ATH9001" "Fichier présent dans input: ${file}"
+        if [ "${gsFileExt}" == "csv" ] ; then
+            fun_logInfo "ATH0003" "Traitement de ${file}"
+            mv ${envData}/input/${file} "${envData}/done/"
+            if [ $? -ne 0 ] ; then
+                fun_logError "ATH1001" "Erreur lors du déplacement de ${file} vers done"
+                mv ${envData}/input/${file} "${envData}/error/"
+                if [ $? -ne 0 ] ; then
+                    fun_logError "ATH1002" "Erreur lors du déplacement de ${file} vers error"
+                fi
+            fi
+        else
+            fun_logError "ATH1003" "Extension non pris en charge (.${gsFileExt})"
+            mv ${envData}/input/${file} "${envData}/error/"
+            if [ $? -ne 0 ] ; then
+                fun_logError "ATH1002" "Erreur lors du déplacement de ${file} vers error"
+            fi
+        fi
     done
-    fun_logInfo "ATH0003" "Fin de la boucle. Nouveau lanecment dans 5 secondes."
+    fun_logDebug "ATH9002" "Fin de la boucle. Nouveau lancement dans 5 secondes."
     sleep 5
 done

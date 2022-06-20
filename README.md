@@ -25,15 +25,16 @@ Insérer le contenu suivant dans votre crontab :
 ### Hades :
 Copier / coller successivement les commandes suivantes :
 ```sh
-[user@host ~]$ sudo mv hades/hades.logrotate /etc/logrotate.d/
-[user@host ~]$ sudo chown root. /etc/logrotate.d/hades.logrotate
-[user@host ~]$ sudo chmod 644 /etc/logrotate.d/hades.logrotate
-[user@host ~]$ sudo mv hades/hades.service /usr/lib/systemd/system/
-[user@host ~]$ sudo chown root. /usr/lib/systemd/system/hades.service
-[user@host ~]$ ln -s /usr/lib/systemd/system/hades.service /etc/systemd/system/hades.service
-[user@host ~]$ sudo systemctl daemon-reload
-[user@host ~]$ sudo systemctl enable hades.service
-[user@host ~]$ sudo systemctl start hades
+[user@host ~]$ cd /app
+[user@host /app]$ sudo mv hades/hades.logrotate /etc/logrotate.d/
+[user@host /app]$ sudo chown root. /etc/logrotate.d/hades.logrotate
+[user@host /app]$ sudo chmod 644 /etc/logrotate.d/hades.logrotate
+[user@host /app]$ sudo mv hades/hades.service /usr/lib/systemd/system/
+[user@host /app]$ sudo chown root. /usr/lib/systemd/system/hades.service
+[user@host /app]$ ln -s /usr/lib/systemd/system/hades.service /etc/systemd/system/hades.service
+[user@host /app]$ sudo systemctl daemon-reload
+[user@host /app]$ sudo systemctl enable hades.service
+[user@host /app]$ sudo systemctl start hades
 ```
 
 ## Messages

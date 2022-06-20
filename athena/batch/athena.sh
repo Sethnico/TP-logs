@@ -25,7 +25,7 @@ trap fun_exit 15
 fun_logInfo "ATH0001" "Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
 
 while true ; do
-    fun_logDebug "ATH0002" "Parcours du répertoire ${envData}/input"
+    fun_logDebug "ATH9004" "Parcours du répertoire ${envData}/input"
     for file in $(ls ${envData}/input) ; do
         gsFileExt="${file##*.}"
         fun_logDebug "ATH9001" "Fichier présent dans input: ${file}"

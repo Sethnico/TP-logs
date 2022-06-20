@@ -43,7 +43,6 @@ Copier / coller successivement les commandes suivantes :
 ### INFO
 ```
 ATH0001     Default
-ATH0002     Scrute rep
 ATH0003     Fichier en traitement
 ATH0004     Démarrage d'archivage
 ATH0005     Déplacement de log en archivage
@@ -68,6 +67,7 @@ ATH1004     Erreur lors du lancement de l'application
 ATH9001     Fichier trouvé dans input
 ATH9002     Fin de boucle
 ATH9003     Lancement de l'application
+ATH9004     Scrutation du répertoire
 ```
 
 ## Further Documentation

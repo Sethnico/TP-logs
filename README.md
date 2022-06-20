@@ -11,28 +11,29 @@ Repo GitHUB pour le TP sur la gestion des logs
 ## Prérequis
 Télécharger les applications depuis GitHUB :
 ```sh
-git clone https://github.com/Sethnico/TP-logs.git .
+[user@host ~]$ sudo git clone https://github.com/Sethnico/TP-logs.git /app
+[user@host ~]$ chown -R user:user /app
 ```
 
 ### Athena :
 Insérer le contenu suivant dans votre crontab :
 ```sh
-crontab -e
+[user@host ~]$ crontab -e
 */5 * * * * /app/athena/batch/stop.sh ; sleep 5 ; /app/athena/batch/purge.sh ; sleep 5 ; /app/athena/batch/start.sh
 ```
 
 ### Hades :
 Copier / coller successivement les commandes suivantes :
 ```sh
-sudo mv hades/hades.logrotate /etc/logrotate.d/
-sudo chown root. /etc/logrotate.d/hades.logrotate
-sudo chmod 644 /etc/logrotate.d/hades.logrotate
-sudo mv hades/hades.service /usr/lib/systemd/system/
-sudo chown root. /usr/lib/systemd/system/hades.service
-ln -s /usr/lib/systemd/system/hades.service /etc/systemd/system/hades.service
-sudo systemctl daemon-reload
-sudo systemctl enable hades.service
-sudo systemctl start hades
+[user@host ~]$ sudo mv hades/hades.logrotate /etc/logrotate.d/
+[user@host ~]$ sudo chown root. /etc/logrotate.d/hades.logrotate
+[user@host ~]$ sudo chmod 644 /etc/logrotate.d/hades.logrotate
+[user@host ~]$ sudo mv hades/hades.service /usr/lib/systemd/system/
+[user@host ~]$ sudo chown root. /usr/lib/systemd/system/hades.service
+[user@host ~]$ ln -s /usr/lib/systemd/system/hades.service /etc/systemd/system/hades.service
+[user@host ~]$ sudo systemctl daemon-reload
+[user@host ~]$ sudo systemctl enable hades.service
+[user@host ~]$ sudo systemctl start hades
 ```
 
 ## Messages

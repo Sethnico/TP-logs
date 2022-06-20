@@ -1,46 +1,36 @@
-==============================================================================
-TP-Logs - Gestion des logs - IUT de Colmar
-==============================================================================
+# TP-Logs - Gestion des logs - IUT de Colmar
 
 Repo GitHUB pour le TP sur la gestion des logs
 
 
-Features
-========
+## Features
 - Athena : Applcation Bash déplacant des fichiers selon l'extention
 - Hades : A compléter...
 
 
-Prerequisites
-=============
+## Prerequisites
 git clone [repo] .
 
-Athena :
-++++++++
+### Athena :
 crontab >
 
-Hades :
-+++++++
+### Hades :
 systemctl enable
 
 
-Usage
-=====
-Athena :
-++++++++
+## Usage
+
+- Athena :
     ~$ /app/athena/batch/start.sh
 
-Hades :
-+++++++
+- Hades :
     ~$ sudo systemctl start hades
 
 
-Messages
-========
-Athena
-------
-INFO :
-++++++
+## Messages
+
+ - Athena
+### INFO
 ATH0001     Default
 ATH0002     Scrute rep
 ATH0003     Fichier en traitement
@@ -53,25 +43,21 @@ ATH0009     Fin de purge
 ATH0010     Application déjà lancée
 ATH0011     Arret de la boucle
 
-ERROR :
-+++++++
+### ERROR
 ATH1001     Erreur de déplacement vers done
 ATH1002     Erreur de déplacement vers error
 ATH1003     Type de fichier non pris en charge
 ATH1004     Erreur lors du lancement de l'application
 
-DEBUG :
-+++++++
+### DEBUG
 ATH9001     Fichier trouvé dans input
 ATH9002     Fin de boucle
 ATH9003     Lancement de l'application
 
 
-Further Documentation
-=====================
+## Further Documentation
 Link to sujt de TP https://someting.bla.com/
 
-Contribute
-==========
+## Contribute
 - Issue Tracker: https://git.renard.intra/java/myApp/issues
 - Source Code: https://git.renard.intra/java/myApp/

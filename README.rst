@@ -28,13 +28,11 @@ Usage
 =====
 Athena :
 ++++++++
-.. code-block:: console
-   ~$ /app/athena/batch/start.sh
+    ~$ /app/athena/batch/start.sh
 
 Hades :
 +++++++
-.. code-block:: console
-   ~$ sudo systemctl start hades
+    ~$ sudo systemctl start hades
 
 
 Messages

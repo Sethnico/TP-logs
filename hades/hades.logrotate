@@ -1,10 +1,10 @@
 /app/hades/log/*.log {
-    su tlmkr tlmkr
+    su nrenard nrenard
     daily
     missingok
     compress
     rotate 4
-    dateext
+    nodateext
     olddir /app/hades/log/archives
     postrotate
         systemctl reload hades

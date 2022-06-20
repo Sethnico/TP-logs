@@ -1,1 +1,1 @@
-*/1 * * * * /app/athena/batch/stop.sh ; sleep 5 ; /app/athena/batch/archivage.sh ; sleep 5 ; /app/athena/batch/purge.sh ; sleep 5 ; /app/athena/batch/start.sh
+*/5 * * * * /app/athena/batch/stop.sh ; sleep 5 ; /app/athena/batch/purge.sh ; sleep 5 ; /app/athena/batch/start.sh

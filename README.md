@@ -10,20 +10,20 @@ Repo GitHUB pour le TP sur la gestion des logs
 
 ## Prérequis
 Télécharger les applications depuis GitHUB :
-```bash
+```sh
 git clone https://github.com/Sethnico/TP-logs.git .
 ```
 
 ### Athena :
 Insérer le contenu suivant dans votre crontab :
-```bash
+```sh
 crontab -e
 */5 * * * * /app/athena/batch/stop.sh ; sleep 5 ; /app/athena/batch/purge.sh ; sleep 5 ; /app/athena/batch/start.sh
 ```
 
 ### Hades :
 Copier / coller successivement les commandes suivantes :
-```bash
+```sh
 sudo mv hades/hades.logrotate /etc/logrotate.d/
 sudo chown root. /etc/logrotate.d/hades.logrotate
 sudo chmod 644 /etc/logrotate.d/hades.logrotate

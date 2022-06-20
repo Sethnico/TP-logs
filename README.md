@@ -21,10 +21,14 @@ systemctl enable
 ## Usage
 
 - Athena :
-    ~$ /app/athena/batch/start.sh
+```bash
+~$ /app/athena/batch/start.sh
+```
 
 - Hades :
-    ~$ sudo systemctl start hades
+```bash
+~$ sudo systemctl start hades
+```
 
 
 ## Messages

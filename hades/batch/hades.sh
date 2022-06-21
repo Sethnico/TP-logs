@@ -21,7 +21,7 @@ function fun_exit {
 }
 
 function fun_reload {
-    fun_logInfo "HAD0001" "Rechargement de l'application $(date +"%Y/%m/%d %T")"
+    fun_logInfo "HAD0002" "Rechargement de l'application $(date +"%Y/%m/%d %T")"
     . /app/hades/param/hades.env
 }
 

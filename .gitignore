@@ -1,2 +1,5 @@
 athena/log/*.log*
+athena/data/done/*
+athena/data/input/*
+athena/data/error/*
 hades/log/*.log*

@@ -29,7 +29,7 @@ trap fun_exit 15
 
 trap fun_reload 1
 
-fun_logInfo "HAD0001" " Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
+fun_logInfo "HAD0001" "Démarrage de la boucle : $(date +"%Y/%m/%d %T")"
 
 while true ; do
     fun_logDebug "HAD9002" "Fin de la boucle. Nouveau lancement dans 5 secondes."
